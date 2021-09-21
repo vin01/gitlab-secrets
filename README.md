@@ -41,4 +41,4 @@ FLAGS
 # You might also like
 
 - [Anatomy of a Cloud Infrastructure Attack via a Pull Request](https://goteleport.com/blog/hack-via-pull-request/)
-- [Authenticating and reading secrets with HashiCorp Vault](https://docs.gitlab.com/ee/ci/examples/authenticating-with-hashicorp-vault/)
+- [Authenticating and reading secrets with HashiCorp Vault](https://docs.gitlab.com/ee/ci/examples/authenticating-with-hashicorp-vault/) (Time limited credentials for Gitlab, and more)
