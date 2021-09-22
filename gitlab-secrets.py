@@ -7,6 +7,8 @@ ROOT_URL = ""
 PRETTY = False
 NOMASK = False
 
+SESSION = requests.session()
+
 def vars(url, token, pretty=False, nomask=False):
     """List all ci/cd variables from all gitlab projects
     which the given token has access to.
@@ -23,19 +25,19 @@ def vars(url, token, pretty=False, nomask=False):
     global ROOT_URL
     global PRETTY
     global NOMASK
+    global SESSION
+
     if not "&page=" in url:
         ROOT_URL = url
         PRETTY = pretty
         NOMASK = nomask
-        resp = requests.get("%s/api/v4/projects?per_page=30&page=1" % (url),
-                            headers={"Authorization": "Bearer %s" % (token)})
+        SESSION.headers.update({"Authorization": "Bearer %s" % (token)})
+        resp = SESSION.get("%s/api/v4/projects?per_page=30&page=1" % (url))
     else:
-        resp = requests.get(url,
-                            headers={"Authorization": "Bearer %s" % (token)})
+        resp = SESSION.get(url)
     if resp.ok:
         for project in resp.json():
-            var_resp = requests.get("%s/api/v4/projects/%s/variables" % (ROOT_URL, project["id"]),
-                                    headers={"Authorization": "Bearer %s" % (token)})
+            var_resp = SESSION.get("%s/api/v4/projects/%s/variables" % (ROOT_URL, project["id"]))
             if var_resp.ok:
                 variables = var_resp.json()
                 if variables:
