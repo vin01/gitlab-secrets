@@ -32,7 +32,7 @@ def vars(url, token, pretty=False, nomask=False):
         PRETTY = pretty
         NOMASK = nomask
         SESSION.headers.update({"Authorization": "Bearer %s" % (token)})
-        resp = SESSION.get("%s/api/v4/projects?per_page=30&page=1" % (url))
+        resp = SESSION.get("%s/api/v4/projects?per_page=40&page=1" % (url))
     else:
         resp = SESSION.get(url)
     if resp.ok:
